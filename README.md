@@ -29,13 +29,13 @@ Two takeaways: adding metadata to text features dramatically improves fraud reca
 [Real / Fake Job Posting Prediction](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction) (EMSCAD corpus): 17,880 postings, 866 fraudulent.
 
 ## Repository Structure
-├── app.py              # Streamlit web app (live demo)
-├── model.joblib        # Serialized best pipeline (TF-IDF + one-hot + SGD)
-├── requirements.txt
-├── src/                # Training pipeline
-├── data/               # Dataset
-├── results/            # Model comparison metrics
-└── paper/              # IEEE-format manuscript
+├── app.py              # Streamlit web app (live demo)<br>
+├── model.joblib        # Serialized best pipeline (TF-IDF + one-hot + SGD)<br>
+├── requirements.txt<br>
+├── src/                # Training pipeline<br>
+├── data/               # Dataset<br>
+├── results/            # Model comparison metrics<br>
+└── paper/              # IEEE-format manuscript<br>
  
 ## Run Locally
 
