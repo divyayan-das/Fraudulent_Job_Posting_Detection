@@ -18,7 +18,8 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 
 # CONFIG
 
-CSV_PATH = "C:\\Users\\Rick\\Downloads\\IAI\\project\\data\\fake_job_postings.csv"
+from pathlib import Path
+CSV_PATH = Path(__file__).resolve().parent.parent / "data" / "fake_job_postings.csv"
 RANDOM_STATE = 42
 
 TEXT_COLS = ["title", "company_profile", "description", "requirements", "benefits"]
@@ -132,8 +133,10 @@ results.append(evaluate("SGD Classifier (Text + Metadata)", sgd_pipeline, X_test
 # SAVE RESULTS
 
 results_df = pd.DataFrame(results, columns=["Model", "Accuracy", "Precision", "Recall", "F1"])
-results_df.to_csv("results.csv", index=False)
 
-joblib.dump(lr_pipeline, "model.joblib")
+ROOT = Path(__file__).resolve().parent.parent
+results_df.to_csv(ROOT / "results" / "results.csv", index=False)
+
+joblib.dump(sgd_pipeline, ROOT / "model.joblib")
 
 print("\nSaved results.csv and model.joblib")
