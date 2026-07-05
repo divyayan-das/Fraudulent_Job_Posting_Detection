@@ -1,4 +1,5 @@
 # Fraudulent Job Posting Detection
+![tests](https://github.com/divyayan-das/Fraudulent_Job_Posting_Detection/actions/workflows/tests.yml/badge.svg)
 
 Machine learning system that flags fraudulent job advertisements using NLP and metadata features, trained on 17,880 real postings, deployed as a live web app.
 
@@ -30,6 +31,8 @@ Two takeaways: adding metadata to text features dramatically improves fraud reca
 
 ## Repository Structure
 ├── app.py              # Streamlit web app (live demo)<br>
+├── tests/              # Pytest suite (unit, artifact contract, data validation)<br>
+├── .github/workflows/  # CI: runs tests on every push<br>
 ├── model.joblib        # Serialized best pipeline (TF-IDF + one-hot + SGD)<br>
 ├── requirements.txt<br>
 ├── src/                # Training pipeline<br>
@@ -44,6 +47,24 @@ pip install -r requirements.txt
 streamlit run app.py          # launch the web app
 python src/model.py           # retrain from scratch
 ```
+
+## Testing
+
+The project includes an automated pytest suite (26 tests) covering three layers:
+
+- **Unit tests** — text preprocessing edge cases (NaN handling, URL stripping, symbol-only input, idempotency)
+- **Artifact contract tests** — the deployed `model.joblib` is tested as a black box: valid binary output, probabilities summing to 1, deterministic predictions, and robustness to unseen categories and empty text
+- **Data validation** — dataset schema, binary target integrity, and expected class imbalance
+
+A sanity test also verifies the model assigns higher fraud probability to an obviously scammy posting than to a legitimate one.
+
+```bash
+pip install pytest
+pytest                        # run the full suite
+pytest --junitxml=report.xml  # JUnit-XML report (used in CI)
+```
+
+Tests run automatically on every push via GitHub Actions.
 
 ## Paper
 
